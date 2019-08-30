@@ -3,6 +3,7 @@ package com.iteration.taskmaster.adapter;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
@@ -44,7 +45,7 @@ public class ViewTaskListAdapter extends RecyclerView.Adapter<ViewTaskListAdapte
         String task_id = viewTaskListArray.get(position).getT_id();
         final String task_name = viewTaskListArray.get(position).getT_name();
         final String task_des = viewTaskListArray.get(position).getT_des();
-        String task_due_date = viewTaskListArray.get(position).getT_due_date();
+        final String task_due_date = viewTaskListArray.get(position).getT_due_date();
         String task_status = viewTaskListArray.get(position).getT_status();
 
         viewHolder.txtTaskNameA.setText(task_name);
@@ -84,6 +85,20 @@ public class ViewTaskListAdapter extends RecyclerView.Adapter<ViewTaskListAdapte
             }
         });
 
+        viewHolder.ivShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(Intent.ACTION_SEND);
+                i.setType("text/plain");
+                String body="Hello,\nYour Task Title is :  \""+task_name+"\"\n\nTask description is below,\n\""
+                        +task_des+"\"\n\nDue Date is :  \""+task_due_date+"\"\n\nPlease Let me know when you done it.";
+                i.putExtra(Intent.EXTRA_SUBJECT,body);
+                i.putExtra(Intent.EXTRA_TEXT,body);
+                i.setPackage("com.whatsapp");
+                context.startActivity(i);
+            }
+        });
+
     }
 
     @Override
@@ -94,6 +109,7 @@ public class ViewTaskListAdapter extends RecyclerView.Adapter<ViewTaskListAdapte
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView txtTaskNameA,txtTaskDescriptionA,txtTaskDueDateA,txtTaskStatusA,txtReadMore;
+        ImageView ivShare;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -103,6 +119,7 @@ public class ViewTaskListAdapter extends RecyclerView.Adapter<ViewTaskListAdapte
             txtTaskDueDateA = (TextView)itemView.findViewById(R.id.txtTaskDueDateA);
             txtTaskStatusA = (TextView)itemView.findViewById(R.id.txtTaskStatusA);
             txtReadMore = (TextView)itemView.findViewById(R.id.txtReadMore);
+            ivShare = (ImageView) itemView.findViewById(R.id.ivShare);
         }
     }
 }

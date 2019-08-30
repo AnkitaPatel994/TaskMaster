@@ -64,7 +64,7 @@ public class AddTaskActivity extends AppCompatActivity {
         txtTaskDueDate = findViewById(R.id.txtTaskDueDate);
         btnSubmit = findViewById(R.id.btnSubmit);
 
-        SimpleDateFormat sdfDate = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
         txtTaskDueDate.setText(sdfDate.format(new Date()));
 
         llTaskDueDate.setOnClickListener(new View.OnClickListener() {
@@ -77,19 +77,19 @@ public class AddTaskActivity extends AppCompatActivity {
 
                         if(selectedmonth < 10 && selectedday < 10)
                         {
-                            txtTaskDueDate.setText("0"+selectedday + "-" + "0"+selectedmonth + "-" + selectedyear);
+                            txtTaskDueDate.setText(selectedyear + "-" + "0"+selectedmonth + "-" + "0"+selectedday);
                         }
                         else if(selectedmonth < 10)
                         {
-                            txtTaskDueDate.setText(selectedday + "-" + "0"+selectedmonth + "-" + selectedyear);
+                            txtTaskDueDate.setText(selectedyear + "-" + "0"+selectedmonth + "-" + selectedday);
                         }
                         else if(selectedday < 10)
                         {
-                            txtTaskDueDate.setText("0"+selectedday + "-" + selectedmonth + "-" + selectedyear);
+                            txtTaskDueDate.setText(selectedyear + "-" + selectedmonth + "-" + "0"+selectedday);
                         }
                         else
                         {
-                            txtTaskDueDate.setText(selectedday + "-" + selectedmonth + "-" + selectedyear);
+                            txtTaskDueDate.setText(selectedyear + "-" + selectedmonth + "-" + selectedday);
                         }
 
 
