@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Task Master</string>
+
+    <string name="reload"><u>Reload page</u></string>
+
+    <string name="title_activity_home">Task Master</string>
+    <string name="title_activity_add_task">Add Task</string>
+    <string name="title_activity_view_all_task">Task</string>
+    <string name="title_activity_pending_task">Pending Task</string>
+    <string name="title_activity_complete_task">Complete Task</string>
+    <string name="title_activity_pending_due_task">Pending Due Task</string>
+
+</resources>
