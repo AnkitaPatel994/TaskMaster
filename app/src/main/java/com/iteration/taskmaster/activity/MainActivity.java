@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
                     try {
                         sleep(5*1000);
 
-                        Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+                        Intent i = new Intent(getApplicationContext(), CompanyListActivity.class);
                         startActivity(i);
                         finish();
 

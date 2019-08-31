@@ -103,7 +103,7 @@ public class PendingTaskListAdapter extends RecyclerView.Adapter<PendingTaskList
                 btnPDCTask.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        
+
                         final ProgressDialog dialog = new ProgressDialog(context);
                         dialog.setMessage("Loading...");
                         dialog.setCancelable(true);

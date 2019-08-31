@@ -1,5 +1,6 @@
 package com.iteration.taskmaster.network;
 
+import com.iteration.taskmaster.model.CompanyList;
 import com.iteration.taskmaster.model.Message;
 import com.iteration.taskmaster.model.ViewTask;
 
@@ -10,6 +11,13 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface GetProductDataService {
+
+    @FormUrlEncoded
+    @POST("json_android/addcompany.php")
+    Call<Message> getAddCompanyData(@Field("c_name") String c_name);
+
+    @GET("json_android/viewcompany.php")
+    Call<CompanyList> getCompanyData();
 
     @FormUrlEncoded
     @POST("json_android/addtask.php")

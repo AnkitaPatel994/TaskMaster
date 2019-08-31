@@ -9,5 +9,6 @@
     <string name="title_activity_pending_task">Pending Task</string>
     <string name="title_activity_complete_task">Complete Task</string>
     <string name="title_activity_pending_due_task">Pending Due Task</string>
+    <string name="title_activity_company_list">Task Master</string>
 
 </resources>

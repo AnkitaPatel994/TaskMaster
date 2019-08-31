@@ -9,7 +9,7 @@
     android:orientation="vertical"
     android:background="@color/colorDivider"
     android:padding="10dp"
-    tools:showIn="@layout/app_bar_home">
+    tools:showIn="@layout/activity_home">
 
     <LinearLayout
         android:id="@+id/llAddTask"
@@ -24,16 +24,19 @@
         android:background="@drawable/ll_box">
 
         <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal"
             android:src="@drawable/ic_plus_circle" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:textSize="20dp"
             android:textStyle="bold"
+            android:gravity="center"
+            android:layout_weight="1.5"
             android:text="Add Task" />
 
     </LinearLayout>
@@ -52,9 +55,10 @@
         android:background="@drawable/ll_box_yellow">
 
         <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:src="@drawable/ic_pending_circle"
+            android:layout_weight="4"
             android:tint="@color/colorWhite" />
 
         <TextView
@@ -63,6 +67,7 @@
             android:textSize="20dp"
             android:layout_marginLeft="10dp"
             android:textStyle="bold"
+            android:layout_weight="1"
             android:textColor="@color/colorWhite"
             android:text="Pending Task" />
 
@@ -82,9 +87,10 @@
         android:background="@drawable/ll_box_red">
 
         <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:src="@drawable/ic_pending_due_circle"
+            android:layout_weight="4"
             android:tint="@color/colorWhite"/>
 
         <TextView
@@ -94,6 +100,7 @@
             android:layout_marginLeft="10dp"
             android:textColor="@color/colorWhite"
             android:textStyle="bold"
+            android:layout_weight="1"
             android:text="Pending Due Task" />
 
     </LinearLayout>
@@ -112,9 +119,10 @@
         android:background="@drawable/ll_box_green">
 
         <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:src="@drawable/ic_complete_circle"
+            android:layout_weight="4"
             android:tint="@color/colorWhite"/>
 
         <TextView
@@ -124,6 +132,7 @@
             android:layout_marginLeft="10dp"
             android:textColor="@color/colorWhite"
             android:textStyle="bold"
+            android:layout_weight="1"
             android:text="Complete Task"/>
 
     </LinearLayout>
@@ -142,8 +151,9 @@
         android:background="@drawable/ll_box">
 
         <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
             android:src="@drawable/ic_view_circle" />
 
         <TextView
@@ -152,6 +162,7 @@
             android:textSize="20dp"
             android:layout_marginLeft="10dp"
             android:textStyle="bold"
+            android:layout_weight="1"
             android:text="View All Task" />
 
     </LinearLayout>
