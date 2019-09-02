@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.iteration.taskmaster.R;
 import com.iteration.taskmaster.activity.ViewAllTaskActivity;
@@ -32,7 +33,7 @@ public class ViewTaskListAdapter extends RecyclerView.Adapter<ViewTaskListAdapte
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int i) {
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.task_list, parent, false);
+                .inflate(R.layout.view_task_list, parent, false);
 
         ViewHolder viewHolder = new ViewHolder(v);
         return viewHolder;
@@ -84,7 +85,7 @@ public class ViewTaskListAdapter extends RecyclerView.Adapter<ViewTaskListAdapte
                 dialog_rm.show();
             }
         });
-
+        viewHolder.ivShare.setVisibility(View.GONE);
         viewHolder.ivShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,6 +121,7 @@ public class ViewTaskListAdapter extends RecyclerView.Adapter<ViewTaskListAdapte
             txtTaskStatusA = (TextView)itemView.findViewById(R.id.txtTaskStatusA);
             txtReadMore = (TextView)itemView.findViewById(R.id.txtReadMore);
             ivShare = (ImageView) itemView.findViewById(R.id.ivShare);
+
         }
     }
 }

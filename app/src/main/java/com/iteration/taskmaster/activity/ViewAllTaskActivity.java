@@ -28,6 +28,7 @@ public class ViewAllTaskActivity extends AppCompatActivity {
 
     RecyclerView rvViewAllTask;
     ArrayList<Task> ViewTaskListArray = new ArrayList<>();
+    String company_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +44,15 @@ public class ViewAllTaskActivity extends AppCompatActivity {
 
         GetProductDataService productDataService = RetrofitInstance.getRetrofitInstance().create(GetProductDataService.class);
 
+        company_id = getIntent().getExtras().getString("company_id");
+
         rvViewAllTask = (RecyclerView)findViewById(R.id.rvViewAllTask);
         rvViewAllTask.setHasFixedSize(true);
 
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false);
         rvViewAllTask.setLayoutManager(manager);
 
-        Call<ViewTask> ViewtTaskCall = productDataService.getViewtTaskListData("*");
+        Call<ViewTask> ViewtTaskCall = productDataService.getViewtTaskListData(company_id,"*");
         ViewtTaskCall.enqueue(new Callback<ViewTask>() {
             @Override
             public void onResponse(Call<ViewTask> call, Response<ViewTask> response) {

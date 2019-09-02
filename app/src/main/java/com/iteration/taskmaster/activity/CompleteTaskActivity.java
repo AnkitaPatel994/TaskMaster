@@ -29,6 +29,7 @@ public class CompleteTaskActivity extends AppCompatActivity {
 
     RecyclerView rvCompleteTask;
     ArrayList<Task> ViewTaskListArray = new ArrayList<>();
+    String company_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,13 +45,15 @@ public class CompleteTaskActivity extends AppCompatActivity {
 
         GetProductDataService productDataService = RetrofitInstance.getRetrofitInstance().create(GetProductDataService.class);
 
+        company_id = getIntent().getExtras().getString("company_id");
+
         rvCompleteTask = (RecyclerView)findViewById(R.id.rvCompleteTask);
         rvCompleteTask.setHasFixedSize(true);
 
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false);
         rvCompleteTask.setLayoutManager(manager);
 
-        Call<ViewTask> ViewtTaskCall = productDataService.getViewtTaskListData("Complete");
+        Call<ViewTask> ViewtTaskCall = productDataService.getViewtTaskListData(company_id,"Complete");
         ViewtTaskCall.enqueue(new Callback<ViewTask>() {
             @Override
             public void onResponse(Call<ViewTask> call, Response<ViewTask> response) {

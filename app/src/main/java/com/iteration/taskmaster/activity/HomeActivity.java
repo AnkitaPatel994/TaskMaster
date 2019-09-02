@@ -29,18 +29,29 @@ import com.iteration.taskmaster.R;
 
 public class HomeActivity extends AppCompatActivity {
 
+    String company_id,company_name;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        company_name = getIntent().getExtras().getString("company_name");
+
         Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle(company_name);
         setSupportActionBar(toolbar);
+
+
+        company_id = getIntent().getExtras().getString("company_id");
 
         LinearLayout llAddTask = findViewById(R.id.llAddTask);
         llAddTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(HomeActivity.this,AddTaskActivity.class);
+                i.putExtra("company_id",company_id);
+                i.putExtra("company_name",company_name);
                 startActivity(i);
             }
         });
@@ -50,6 +61,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(HomeActivity.this,ViewAllTaskActivity.class);
+                i.putExtra("company_id",company_id);
                 startActivity(i);
             }
         });
@@ -59,6 +71,8 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(HomeActivity.this,PendingTaskActivity.class);
+                i.putExtra("company_id",company_id);
+                i.putExtra("company_name",company_name);
                 startActivity(i);
             }
         });
@@ -68,6 +82,8 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(HomeActivity.this,PendingDueTaskActivity.class);
+                i.putExtra("company_id",company_id);
+                i.putExtra("company_name",company_name);
                 startActivity(i);
             }
         });
@@ -77,10 +93,17 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(HomeActivity.this,CompleteTaskActivity.class);
+                i.putExtra("company_id",company_id);
                 startActivity(i);
             }
         });
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i = new Intent(HomeActivity.this,CompanyListActivity.class);
+        startActivity(i);
+    }
 }

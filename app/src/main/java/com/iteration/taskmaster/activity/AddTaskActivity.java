@@ -38,6 +38,7 @@ public class AddTaskActivity extends AppCompatActivity {
     LinearLayout llTaskDueDate;
     TextView txtTaskDueDate;
     Button btnSubmit;
+    String company_id,company_name;
 
     Calendar c = Calendar.getInstance();
     int mYear = c.get(Calendar.YEAR);
@@ -57,6 +58,9 @@ public class AddTaskActivity extends AppCompatActivity {
         }
 
         productDataService = RetrofitInstance.getRetrofitInstance().create(GetProductDataService.class);
+
+        company_id = getIntent().getExtras().getString("company_id");
+        company_name = getIntent().getExtras().getString("company_name");
 
         txtTaskName = findViewById(R.id.txtTaskName);
         txtTaskDescription = findViewById(R.id.txtTaskDescription);
@@ -92,8 +96,6 @@ public class AddTaskActivity extends AppCompatActivity {
                             txtTaskDueDate.setText(selectedyear + "-" + selectedmonth + "-" + selectedday);
                         }
 
-
-
                     }
                 }, mYear, mMonth, mDay);
 
@@ -125,7 +127,7 @@ public class AddTaskActivity extends AppCompatActivity {
                     dialog.setCancelable(true);
                     dialog.show();
 
-                    Call<Message> AddTaskCall = productDataService.getAddTaskData(TaskName,TaskDescription,TaskDueDate,"Pending");
+                    Call<Message> AddTaskCall = productDataService.getAddTaskData(TaskName,TaskDescription,TaskDueDate,company_id,"Pending");
                     AddTaskCall.enqueue(new Callback<Message>() {
                         @Override
                         public void onResponse(Call<Message> call, Response<Message> response) {
@@ -136,6 +138,8 @@ public class AddTaskActivity extends AppCompatActivity {
                             {
                                 Log.d("message",""+message);
                                 Intent i = new Intent(AddTaskActivity.this,HomeActivity.class);
+                                i.putExtra("company_id",company_id);
+                                i.putExtra("company_name",company_name);
                                 startActivity(i);
                             }
                             else
