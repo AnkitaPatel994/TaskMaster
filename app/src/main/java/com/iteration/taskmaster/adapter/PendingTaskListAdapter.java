@@ -23,6 +23,8 @@ import com.iteration.taskmaster.R;
 import com.iteration.taskmaster.activity.AddTaskActivity;
 import com.iteration.taskmaster.activity.CompanyListActivity;
 import com.iteration.taskmaster.activity.HomeActivity;
+import com.iteration.taskmaster.activity.MoreDetailActivity;
+import com.iteration.taskmaster.activity.PendingMoreDetailActivity;
 import com.iteration.taskmaster.activity.PendingTaskActivity;
 import com.iteration.taskmaster.model.Message;
 import com.iteration.taskmaster.model.Task;
@@ -66,27 +68,28 @@ public class PendingTaskListAdapter extends RecyclerView.Adapter<PendingTaskList
         final String task_id = viewTaskListArray.get(position).getT_id();
         final String task_name = viewTaskListArray.get(position).getT_name();
         final String task_des = viewTaskListArray.get(position).getT_des();
+        final String task_i_date = viewTaskListArray.get(position).getT_i_date();
         final String task_due_date = viewTaskListArray.get(position).getT_due_date();
         String task_status = viewTaskListArray.get(position).getT_status();
 
         viewHolder.txtTaskNameA.setText(task_name);
         viewHolder.txtTaskDescriptionA.setText(task_des);
         viewHolder.txtTaskDueDateA.setText(task_due_date);
-        viewHolder.txtTaskStatusA.setText(task_status);
-
-        if (task_status.equals("Pending"))
-        {
-            viewHolder.txtTaskStatusA.setTextColor(ContextCompat.getColor(context, R.color.colorYellow));
-        }
-        else if (task_status.equals("Complete"))
-        {
-            viewHolder.txtTaskStatusA.setTextColor(ContextCompat.getColor(context, R.color.colorGreen));
-        }
+        viewHolder.txtTaskCreateDateA.setText(task_i_date);
 
         viewHolder.txtReadMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Dialog dialog_rm = new Dialog(context,android.R.style.Theme_Light_NoTitleBar);
+
+                Intent i = new Intent(context, PendingMoreDetailActivity.class);
+                i.putExtra("task_id",task_id);
+                i.putExtra("task_name",task_name);
+                i.putExtra("task_des",task_des);
+                i.putExtra("company_id",company_id);
+                i.putExtra("company_name",company_name);
+                context.startActivity(i);
+
+                /*final Dialog dialog_rm = new Dialog(context,android.R.style.Theme_Light_NoTitleBar);
                 dialog_rm.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                 dialog_rm.setContentView(R.layout.pending_dialog);
                 dialog_rm.setCancelable(true);
@@ -146,7 +149,7 @@ public class PendingTaskListAdapter extends RecyclerView.Adapter<PendingTaskList
                     }
                 });
 
-                dialog_rm.show();
+                dialog_rm.show();*/
             }
         });
 
@@ -210,7 +213,7 @@ public class PendingTaskListAdapter extends RecyclerView.Adapter<PendingTaskList
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView txtTaskNameA,txtTaskDescriptionA,txtTaskDueDateA,txtTaskStatusA,txtReadMore;
+        TextView txtTaskNameA,txtTaskDescriptionA,txtTaskDueDateA,txtTaskCreateDateA,txtReadMore;
         ImageView ivShare;
         View llTLDelete;
 
@@ -220,7 +223,7 @@ public class PendingTaskListAdapter extends RecyclerView.Adapter<PendingTaskList
             txtTaskNameA = (TextView)itemView.findViewById(R.id.txtTaskNameA);
             txtTaskDescriptionA = (TextView)itemView.findViewById(R.id.txtTaskDescriptionA);
             txtTaskDueDateA = (TextView)itemView.findViewById(R.id.txtTaskDueDateA);
-            txtTaskStatusA = (TextView)itemView.findViewById(R.id.txtTaskStatusA);
+            txtTaskCreateDateA = (TextView)itemView.findViewById(R.id.txtTaskCreateDateA);
             txtReadMore = (TextView)itemView.findViewById(R.id.txtReadMore);
             ivShare = (ImageView) itemView.findViewById(R.id.ivShare);
             llTLDelete = (View) itemView.findViewById(R.id.llTLDelete);

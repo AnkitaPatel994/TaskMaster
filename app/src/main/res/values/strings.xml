@@ -10,5 +10,8 @@
     <string name="title_activity_complete_task">Complete Task</string>
     <string name="title_activity_pending_due_task">Pending Due Task</string>
     <string name="title_activity_company_list">Task Master</string>
+    <string name="title_activity_more_detail">MoreDetailActivity</string>
+    <string name="title_activity_pending_more_detail">PendingMoreDetailActivity</string>
+    <string name="title_activity_add_reminder">Add Reminder</string>
 
 </resources>

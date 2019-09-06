@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.iteration.taskmaster.R;
+import com.iteration.taskmaster.activity.MoreDetailActivity;
 import com.iteration.taskmaster.activity.ViewAllTaskActivity;
 import com.iteration.taskmaster.model.Task;
 
@@ -46,35 +47,47 @@ public class ViewTaskListAdapter extends RecyclerView.Adapter<ViewTaskListAdapte
         String task_id = viewTaskListArray.get(position).getT_id();
         final String task_name = viewTaskListArray.get(position).getT_name();
         final String task_des = viewTaskListArray.get(position).getT_des();
+        final String task_i_date = viewTaskListArray.get(position).getT_i_date();
         final String task_due_date = viewTaskListArray.get(position).getT_due_date();
+        final String task_c_date = viewTaskListArray.get(position).getT_c_date();
         String task_status = viewTaskListArray.get(position).getT_status();
 
-        viewHolder.txtTaskNameA.setText(task_name);
-        viewHolder.txtTaskDescriptionA.setText(task_des);
-        viewHolder.txtTaskDueDateA.setText(task_due_date);
-        viewHolder.txtTaskStatusA.setText(task_status);
+        viewHolder.txtVTTaskName.setText(task_name);
+        viewHolder.txtVTTaskDescription.setText(task_des);
+        viewHolder.txtVTTaskCreateDate.setText(task_i_date);
+        viewHolder.txtVTTaskDueDate.setText(task_due_date);
+        viewHolder.txtVTTaskCompleteDate.setText(task_c_date);
+        viewHolder.txtVTTaskStatus.setText(task_status);
 
         if (task_status.equals("Pending"))
         {
-            viewHolder.txtTaskStatusA.setTextColor(ContextCompat.getColor(context, R.color.colorYellow));
+            viewHolder.llVTTaskCompleteDate.setVisibility(View.GONE);
+            viewHolder.txtVTTaskStatus.setTextColor(ContextCompat.getColor(context, R.color.colorYellow));
         }
         else if (task_status.equals("Complete"))
         {
-            viewHolder.txtTaskStatusA.setTextColor(ContextCompat.getColor(context, R.color.colorGreen));
+            viewHolder.txtVTTaskStatus.setTextColor(ContextCompat.getColor(context, R.color.colorGreen));
         }
 
-        viewHolder.txtReadMore.setOnClickListener(new View.OnClickListener() {
+        viewHolder.txtVTReadMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Dialog dialog_rm = new Dialog(context,android.R.style.Theme_Light_NoTitleBar);
+
+                Intent i = new Intent(context, MoreDetailActivity.class);
+                i.putExtra("task_name",task_name);
+                i.putExtra("task_des",task_des);
+                context.startActivity(i);
+                /*final Dialog dialog_rm = new Dialog(context,android.R.style.Theme_Light_NoTitleBar);
                 dialog_rm.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                 dialog_rm.setContentView(R.layout.readmore_dialog);
                 dialog_rm.setCancelable(true);
 
                 TextView txtRDTaskName = (TextView)dialog_rm.findViewById(R.id.txtRDTaskName);
                 txtRDTaskName.setText(task_name);
+
                 TextView txtRDescription = (TextView)dialog_rm.findViewById(R.id.txtRDescription);
                 txtRDescription.setText(task_des);
+
                 ImageView ivRDClose = (ImageView) dialog_rm.findViewById(R.id.ivRDClose);
                 ivRDClose.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -82,21 +95,8 @@ public class ViewTaskListAdapter extends RecyclerView.Adapter<ViewTaskListAdapte
                         dialog_rm.dismiss();
                     }
                 });
-                dialog_rm.show();
-            }
-        });
-        viewHolder.ivShare.setVisibility(View.GONE);
-        viewHolder.ivShare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i=new Intent(Intent.ACTION_SEND);
-                i.setType("text/plain");
-                String body="Hello,\nYour Task Title is :  \""+task_name+"\"\n\nTask description is below,\n\""
-                        +task_des+"\"\n\nDue Date is :  \""+task_due_date+"\"\n\nPlease Let me know when you done it.";
-                i.putExtra(Intent.EXTRA_SUBJECT,body);
-                i.putExtra(Intent.EXTRA_TEXT,body);
-                i.setPackage("com.whatsapp");
-                context.startActivity(i);
+
+                dialog_rm.show();*/
             }
         });
 
@@ -109,18 +109,20 @@ public class ViewTaskListAdapter extends RecyclerView.Adapter<ViewTaskListAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView txtTaskNameA,txtTaskDescriptionA,txtTaskDueDateA,txtTaskStatusA,txtReadMore;
-        ImageView ivShare;
+        TextView txtVTTaskName,txtVTTaskDescription,txtVTTaskCreateDate,txtVTTaskDueDate,txtVTTaskCompleteDate,txtVTTaskStatus,txtVTReadMore;
+        LinearLayout llVTTaskCompleteDate;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            txtTaskNameA = (TextView)itemView.findViewById(R.id.txtTaskNameA);
-            txtTaskDescriptionA = (TextView)itemView.findViewById(R.id.txtTaskDescriptionA);
-            txtTaskDueDateA = (TextView)itemView.findViewById(R.id.txtTaskDueDateA);
-            txtTaskStatusA = (TextView)itemView.findViewById(R.id.txtTaskStatusA);
-            txtReadMore = (TextView)itemView.findViewById(R.id.txtReadMore);
-            ivShare = (ImageView) itemView.findViewById(R.id.ivShare);
+            txtVTTaskName = (TextView)itemView.findViewById(R.id.txtVTTaskName);
+            txtVTTaskDescription = (TextView)itemView.findViewById(R.id.txtVTTaskDescription);
+            txtVTTaskCreateDate = (TextView)itemView.findViewById(R.id.txtVTTaskCreateDate);
+            txtVTTaskDueDate = (TextView)itemView.findViewById(R.id.txtVTTaskDueDate);
+            txtVTTaskCompleteDate = (TextView)itemView.findViewById(R.id.txtVTTaskCompleteDate);
+            txtVTTaskStatus = (TextView)itemView.findViewById(R.id.txtVTTaskStatus);
+            llVTTaskCompleteDate = (LinearLayout) itemView.findViewById(R.id.llVTTaskCompleteDate);
+            txtVTReadMore = (TextView)itemView.findViewById(R.id.txtVTReadMore);
 
         }
     }

@@ -12,32 +12,72 @@
     tools:showIn="@layout/activity_home">
 
     <LinearLayout
-        android:id="@+id/llAddTask"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:padding="10dp"
-        android:elevation="5dp"
-        android:layout_weight="1"
-        android:background="@drawable/ll_box">
+        android:orientation="horizontal"
+        android:layout_weight="1">
 
-        <ImageView
+        <LinearLayout
+            android:id="@+id/llAddTask"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_gravity="center_horizontal"
-            android:src="@drawable/ic_plus_circle" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="20dp"
-            android:textStyle="bold"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_marginRight="5dp"
             android:gravity="center"
-            android:layout_weight="1.5"
-            android:text="Add Task" />
+            android:padding="10dp"
+            android:elevation="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/ll_box">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/ic_plus_circle" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_weight="1.5"
+                android:text="Add Task" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llAddReminder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="10dp"
+            android:layout_marginLeft="5dp"
+            android:elevation="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/ll_box">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/ic_reminder" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_weight="1.5"
+                android:text="Add Reminder" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

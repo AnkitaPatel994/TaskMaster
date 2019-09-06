@@ -10,8 +10,12 @@ public class Task {
     private String t_name;
     @SerializedName("t_des")
     private String t_des;
+    @SerializedName("t_i_date")
+    private String t_i_date;
     @SerializedName("t_due_date")
     private String t_due_date;
+    @SerializedName("t_c_date")
+    private String t_c_date;
     @SerializedName("t_status")
     private String t_status;
 
@@ -39,12 +43,28 @@ public class Task {
         this.t_des = t_des;
     }
 
+    public String getT_i_date() {
+        return t_i_date;
+    }
+
+    public void setT_i_date(String t_i_date) {
+        this.t_i_date = t_i_date;
+    }
+
     public String getT_due_date() {
         return t_due_date;
     }
 
     public void setT_due_date(String t_due_date) {
         this.t_due_date = t_due_date;
+    }
+
+    public String getT_c_date() {
+        return t_c_date;
+    }
+
+    public void setT_c_date(String t_c_date) {
+        this.t_c_date = t_c_date;
     }
 
     public String getT_status() {

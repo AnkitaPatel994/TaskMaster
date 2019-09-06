@@ -8,6 +8,7 @@
     <color name="colorDivider">#e6e6e6</color>
     <color name="colorRed">#ff3333</color>
     <color name="colorGreen">#009900</color>
+    <color name="colorGreenDark">#008000</color>
     <color name="colorGrey">#C4C2C1</color>
     <color name="colorYellow">#ffc922</color>
     <color name="colorGreyDark">#999898</color>

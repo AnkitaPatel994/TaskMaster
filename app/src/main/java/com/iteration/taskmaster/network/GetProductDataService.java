@@ -39,7 +39,9 @@ public interface GetProductDataService {
     @FormUrlEncoded
     @POST("json_android/viewtask.php")
     Call<ViewTask> getViewtTaskListData(@Field("company_id") String company_id,
-                                        @Field("t_status") String t_status);
+                                        @Field("t_status") String t_status,
+                                        @Field("startDate") String startDate,
+                                        @Field("endDate") String endDate);
 
     @FormUrlEncoded
     @POST("json_android/updatetask.php")
@@ -49,5 +51,11 @@ public interface GetProductDataService {
     @FormUrlEncoded
     @POST("json_android/deletetask.php")
     Call<Message> getDeleteTaskData(@Field("t_id") String t_id);
+
+    @FormUrlEncoded
+    @POST("json_android/addreminder.php")
+    Call<Message> getAddReminderData(@Field("r_name") String r_name,
+                                     @Field("r_date") String r_date,
+                                     @Field("r_time") String r_time);
 
 }

@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -38,11 +39,14 @@ public class PendingTaskActivity extends AppCompatActivity {
     RecyclerView rvPendingTask;
     ArrayList<Task> ViewTaskListArray = new ArrayList<>();
     String company_id,company_name;
-    TextView txtPTTodayDate;
+    TextView txtPTStartDate,txtPTEndDate;
     Calendar c = Calendar.getInstance();
     int mYear = c.get(Calendar.YEAR);
     int mMonth = c.get(Calendar.MONTH);
     int mDay = c.get(Calendar.DAY_OF_MONTH);
+    int yearM,monthM,dayM;
+    GetProductDataService productDataService;
+    Button btnPTSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,15 +60,17 @@ public class PendingTaskActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
-        GetProductDataService productDataService = RetrofitInstance.getRetrofitInstance().create(GetProductDataService.class);
+        productDataService = RetrofitInstance.getRetrofitInstance().create(GetProductDataService.class);
 
-        LinearLayout llPTTodayDate = findViewById(R.id.llPTTodayDate);
-        txtPTTodayDate = findViewById(R.id.txtPTTodayDate);
+        btnPTSearch = findViewById(R.id.btnPTSearch);
+        txtPTStartDate = findViewById(R.id.txtPTStartDate);
+        txtPTEndDate = findViewById(R.id.txtPTEndDate);
 
         SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
-        txtPTTodayDate.setText(sdfDate.format(new Date()));
+        txtPTStartDate.setText(sdfDate.format(new Date()));
+        txtPTEndDate.setText(sdfDate.format(new Date()));
 
-        llPTTodayDate.setOnClickListener(new View.OnClickListener() {
+        txtPTStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -74,27 +80,59 @@ public class PendingTaskActivity extends AppCompatActivity {
 
                         if(selectedmonth < 10 && selectedday < 10)
                         {
-                            txtPTTodayDate.setText(selectedyear + "-" + "0"+selectedmonth + "-" + "0"+selectedday);
+                            txtPTStartDate.setText(selectedyear + "-" + "0"+selectedmonth + "-" + "0"+selectedday);
                         }
                         else if(selectedmonth < 10)
                         {
-                            txtPTTodayDate.setText(selectedyear + "-" + "0"+selectedmonth + "-" + selectedday);
+                            txtPTStartDate.setText(selectedyear + "-" + "0"+selectedmonth + "-" + selectedday);
                         }
                         else if(selectedday < 10)
                         {
-                            txtPTTodayDate.setText(selectedyear + "-" + selectedmonth + "-" + "0"+selectedday);
+                            txtPTStartDate.setText(selectedyear + "-" + selectedmonth + "-" + "0"+selectedday);
                         }
                         else
                         {
-                            txtPTTodayDate.setText(selectedyear + "-" + selectedmonth + "-" + selectedday);
+                            txtPTStartDate.setText(selectedyear + "-" + selectedmonth + "-" + selectedday);
                         }
 
                     }
                 }, mYear, mMonth, mDay);
 
-                mDatePicker.getDatePicker().setMinDate(c.getTimeInMillis());
+                //mDatePicker.getDatePicker().setMinDate(c.getTimeInMillis());
                 mDatePicker.show();
+            }
+        });
 
+        txtPTEndDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                DatePickerDialog mDatePicker = new DatePickerDialog(PendingTaskActivity.this,new DatePickerDialog.OnDateSetListener() {
+                    public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
+                        selectedmonth = selectedmonth + 1;
+
+                        if(selectedmonth < 10 && selectedday < 10)
+                        {
+                            txtPTEndDate.setText(selectedyear + "-" + "0"+selectedmonth + "-" + "0"+selectedday);
+                        }
+                        else if(selectedmonth < 10)
+                        {
+                            txtPTEndDate.setText(selectedyear + "-" + "0"+selectedmonth + "-" + selectedday);
+                        }
+                        else if(selectedday < 10)
+                        {
+                            txtPTEndDate.setText(selectedyear + "-" + selectedmonth + "-" + "0"+selectedday);
+                        }
+                        else
+                        {
+                            txtPTEndDate.setText(selectedyear + "-" + selectedmonth + "-" + selectedday);
+                        }
+
+                    }
+                }, mYear, mMonth, mDay);
+
+                //mDatePicker.getDatePicker().setMinDate(c.getTimeInMillis());
+                mDatePicker.show();
             }
         });
 
@@ -107,7 +145,23 @@ public class PendingTaskActivity extends AppCompatActivity {
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false);
         rvPendingTask.setLayoutManager(manager);
 
-        Call<ViewTask> ViewtTaskCall = productDataService.getViewtTaskListData(company_id,"Pending");
+        String StartDate = txtPTStartDate.getText().toString();
+        String EndDate = txtPTEndDate.getText().toString();
+        ViewtTask(company_id,"Pending",StartDate,EndDate);
+
+        btnPTSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String StartDate = txtPTStartDate.getText().toString();
+                String EndDate = txtPTEndDate.getText().toString();
+                ViewtTask(company_id,"Pending",StartDate,EndDate);
+            }
+        });
+
+    }
+
+    private void ViewtTask(final String company_id, String status, String startDate, String endDate) {
+        Call<ViewTask> ViewtTaskCall = productDataService.getViewtTaskListData(company_id,status,startDate,endDate);
         ViewtTaskCall.enqueue(new Callback<ViewTask>() {
             @Override
             public void onResponse(Call<ViewTask> call, Response<ViewTask> response) {
@@ -131,7 +185,6 @@ public class PendingTaskActivity extends AppCompatActivity {
                 Toast.makeText(PendingTaskActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
     @Override

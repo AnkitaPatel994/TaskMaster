@@ -63,10 +63,11 @@
 
                     <TextView
                         android:id="@+id/txtRDescription"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorBlack"
                         android:textSize="18dp"
+                        android:justificationMode="inter_word"
                         android:layout_marginBottom="5dp" />
 
                 </LinearLayout>

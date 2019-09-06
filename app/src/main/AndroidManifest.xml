@@ -13,9 +13,21 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.AddReminderActivity"
+            android:label="@string/title_activity_add_reminder"
+            android:theme="@style/AppTheme.ActionBar"/>
+        <activity
+            android:name=".activity.PendingMoreDetailActivity"
+            android:label="@string/title_activity_pending_more_detail"
+            android:theme="@style/AppTheme.ActionBar" />
+        <activity
+            android:name=".activity.MoreDetailActivity"
+            android:label="@string/title_activity_more_detail"
+            android:theme="@style/AppTheme.ActionBar" />
+        <activity
             android:name=".activity.CompanyListActivity"
             android:label="@string/title_activity_company_list"
-            android:theme="@style/AppTheme.ActionBar"/>
+            android:theme="@style/AppTheme.ActionBar" />
         <activity
             android:name=".activity.PendingDueTaskActivity"
             android:label="@string/title_activity_pending_due_task"

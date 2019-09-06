@@ -56,6 +56,17 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        LinearLayout llAddReminder = findViewById(R.id.llAddReminder);
+        llAddReminder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(HomeActivity.this,AddReminderActivity.class);
+                i.putExtra("company_id",company_id);
+                i.putExtra("company_name",company_name);
+                startActivity(i);
+            }
+        });
+
         LinearLayout llViewAllTask = findViewById(R.id.llViewAllTask);
         llViewAllTask.setOnClickListener(new View.OnClickListener() {
             @Override
